@@ -1,11 +1,21 @@
 body{
     background-color: black;
 }
+
+.header{
+    display: flex;
+    justify-content: center;
+}
+
+.input{
+    display: flex;
+    justify-content: center;
+}
 .movie-list {
     display: flex;
     flex-wrap: wrap; 
     list-style: none;
-    margin: 50px;
+    margin: 20px;
   }
   
 .movie-list li {
@@ -13,9 +23,9 @@ body{
   }
   
 .movie-list img {
-    
     width: 300px; 
     height: auto;
     cursor: pointer; 
   }
+    
   
