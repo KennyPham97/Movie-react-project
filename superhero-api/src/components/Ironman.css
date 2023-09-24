@@ -1,0 +1,21 @@
+body{
+    background-color: black;
+}
+.movie-list {
+    display: flex;
+    flex-wrap: wrap; 
+    list-style: none;
+    margin: 50px;
+  }
+  
+.movie-list li {
+    margin: 10px;
+  }
+  
+.movie-list img {
+    
+    width: 300px; 
+    height: auto;
+    cursor: pointer; 
+  }
+  
