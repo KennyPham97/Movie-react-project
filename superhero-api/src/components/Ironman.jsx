@@ -1,49 +1,66 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
+import './Ironman.css'
 
 const Ironman = () => {
-
+    const [searchQuery, setSearchQuery] = useState("")
     const [movies, setMovies] = useState([])
-    
-    
-    
-    const ironManData = async() => {
-        let response = await fetch('https://www.omdbapi.com/?s=Iron-Man&apikey=f9befeac')
-        let data = await response.json() //json allows us to manipulate data
-        console.log(data)
-        setMovies(data.Search)
+    const [selectedMovie, setSelectedMovie] = useState(null)
 
-    }
+  const ironManData = async (query) => {
+    let response = await fetch(`https://www.omdbapi.com/?s=${query}&apikey=f9befeac`)
+    let data = await response.json()
+    console.log(data)
+    setMovies(data.Search)
+  };
 
+  useEffect(() => {
+    ironManData('Iron-Man')
+  }, [])
 
+  const handleMovieClick = (movie) => {
+    setSelectedMovie(movie)
+  };
 
-useEffect(() => {
-    ironManData()
-        
-}, [])
+  const handleInputChange = (e) => {
+    setSearchQuery(e.target.value)
+  };
 
-
-
+  const handleSearch = () => {
+    ironManData(searchQuery)
+  };
 
   return (
     <div>
-        <button onClick={ironManData}>Get Ironman</button>
-        <ul>
-          {movies.map((movie, index) => {
-              return(
-                  <li key={index}>
-                      <h2>{movie.Title}</h2>
-                      <p>{movie.imdbID}</p>
-                      <p>{movie.Year}</p>
-                      <p>{movie.Type}</p>
-                      <img src ={movie.Poster}/>
-                      
-                  </li>
-              ) 
-          })}
-      </ul>
-        
-    </div>
-  )
-}
+      <div>
+        <input type="text"placeholder=""value={searchQuery}onChange={handleInputChange}/>
+        <button onClick={handleSearch}>Search</button>
+      </div>
+      
+      <ul className="movie-list">
+        {movies.map((movie, index) => {
+          return (
+            <li key={index} className="movie-item">
+              <h2>{movie.Title}</h2>
 
-export default Ironman
+              <img src={movie.Poster} alt={movie.Title} onClick={() => handleMovieClick(movie)}/>
+              {selectedMovie && selectedMovie.imdbID === movie.imdbID && (
+                <div>
+                  <p>Year: {selectedMovie.Year}</p>
+                  <p>Type: {selectedMovie.Type}</p>
+                </div>
+              )}
+            </li>
+          
+          );
+        })}
+      </ul>
+    </div>
+  );
+};
+
+export default Ironman;
+
+
+
+
+
