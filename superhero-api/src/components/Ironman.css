@@ -1,15 +1,15 @@
 body{
-    background-color: black;
+    background-color: black
 }
 
 .header{
     display: flex;
-    justify-content: center;
+    justify-content: center
 }
 
 .input{
     display: flex;
-    justify-content: center;
+    justify-content: center
 }
 .movie-list {
     display: flex;
@@ -25,7 +25,7 @@ body{
 .movie-list img {
     width: 300px; 
     height: auto;
-    cursor: pointer; 
+    cursor: pointer
   }
     
   
