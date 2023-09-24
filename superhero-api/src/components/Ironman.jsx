@@ -5,35 +5,39 @@ const Ironman = () => {
     const [searchQuery, setSearchQuery] = useState("")
     const [movies, setMovies] = useState([])
     const [selectedMovie, setSelectedMovie] = useState(null)
-
-  const ironManData = async (query) => {
+    
+    useEffect(() => {
+      fetchMovieData('Iron-Man')
+    }, [])
+    
+    const fetchMovieData = async (query) => {
     let response = await fetch(`https://www.omdbapi.com/?s=${query}&apikey=f9befeac`)
     let data = await response.json()
     console.log(data)
     setMovies(data.Search)
   };
 
-  useEffect(() => {
-    ironManData('Iron-Man')
-  }, [])
 
-  const handleMovieClick = (movie) => {
-    setSelectedMovie(movie)
-  };
-
-  const handleInputChange = (e) => {
-    setSearchQuery(e.target.value)
-  };
-
-  const handleSearch = () => {
-    ironManData(searchQuery)
-  };
-
+  
+    const handleInputChange = (e) => {
+      setSearchQuery(e.target.value)
+    };
+    
+    const handleSearch = () => {
+        fetchMovieData(searchQuery)
+    };
+    const handleMovieClick = (movie) => {
+      setSelectedMovie(movie)
+    };
+    
   return (
     <div>
       <div>
-        <input type="text"placeholder=""value={searchQuery}onChange={handleInputChange}/>
+        <h1 className='header'>MOVIES.KP</h1>
+        <div className='input'>
+        <input type="text"value={searchQuery}onChange={handleInputChange}/>
         <button onClick={handleSearch}>Search</button>
+        </div>
       </div>
       
       <ul className="movie-list">
@@ -51,14 +55,14 @@ const Ironman = () => {
               )}
             </li>
           
-          );
+          )
         })}
       </ul>
     </div>
-  );
-};
-
+  )
+}
 export default Ironman;
+
 
 
 
