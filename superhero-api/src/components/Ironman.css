@@ -1,5 +1,7 @@
 body {
   background-color: black;
+  color: white
+
 }
 
 .logo{
@@ -41,6 +43,7 @@ body {
   height: 48px;
   font-size: large;
   font-weight:bolder;
+  color: white
 }
 
 .movie-list {
